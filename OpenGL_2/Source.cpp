@@ -1,7 +1,7 @@
-#ifdef __APPLE__
-#include <glad/glad.h>
-#else
+#ifdef __linux__
 #include "GL/glew.h"
+#else
+#include <glad/glad.h>
 #endif
 #include <GLFW/glfw3.h>
 
@@ -56,21 +56,21 @@ int main()
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
-	#ifdef __APPLE__
-    // glad: load all OpenGL function pointers
-    // ---------------------------------------
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-    {
-        std::cerr << "Failed to initialize GLAD" << std::endl;
-        return -1;
-    }
-    #else
+	#ifdef __linux__
     // Initialize GLEW
     glewExperimental = GL_TRUE;
     if (glewInit() != GLEW_OK)
     {
         std::cerr << "Failed to initialize GLEW" << std::endl;
         return false;
+    }
+    #else
+    // glad: load all OpenGL function pointers
+    // ---------------------------------------
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    {
+        std::cerr << "Failed to initialize GLAD" << std::endl;
+        return -1;
     }
     #endif
 
