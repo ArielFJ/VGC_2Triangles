@@ -15,7 +15,7 @@ endif
 
 SRC += OpenGL_2/Source.cpp
 
-OBJ += bin/main.o
+OBJ += bin/Source.o
 
 WARNINGS=-w
 
